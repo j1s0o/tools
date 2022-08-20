@@ -52,8 +52,9 @@ def Get_Boolean(p):
                 print(ch)
                 list.append(ch)
             user_ch = int(input("your choice : "))
+            s_p = input("Sepecial params : ")
             for i in range (0,25):
-                pw  = list[user_ch].replace("{pw}",p).replace("{i}",str(i))
+                pw  = list[user_ch].replace("{pw}",s_p).replace("{i}",str(i))
                 get = session.get(url = url , headers=header , params={p : pw[2:]} )
                 print(len(get.text) , pw)
             f2.close()
@@ -67,10 +68,11 @@ def Get_Boolean(p):
             sp = input("special: ")
             len_pw = int(input("length :"))
             password = ""
+            s_p = input("Sepecial params : ")
             for i in range(1,len_pw):
                 for j in char:
                     pass_1 = password + j
-                    pw  = list[user_ch].replace("{pw}",p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
+                    pw  = list[user_ch].replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
                     get = session.get(url = url , headers=header , params={p : pw[2:]})            
                     if (sp in get.text):
                         print(len(get.text) , pw[2:] ,get.url)                      

