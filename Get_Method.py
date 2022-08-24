@@ -3,6 +3,31 @@ import string
 import time
 char = string.printable
 session = requests.Session()
+list_filter = []
+#Menu
+def Get_Menu(url , header , p ):
+    print("1.Check filter")
+    print("2.Easy payload brute force")
+    print("3.Boolean sql")
+    print("4.Error based sql")
+    print("5.Your payload + filter bypass ")
+    print("6.Time based sql")
+    print("7.Numeric")
+    choose_get = int(input("choose : "))
+    if choose_get == 1 :
+        Filter(url , header , p , list_filter)
+    elif choose_get == 2:
+        Get_Easy_Bf(url , header ,p)
+    elif choose_get == 3:
+        Get_Boolean(url , header , p)
+    elif choose_get == 4:
+        Get_Error_based(url , header ,p)
+    elif choose_get == 5:
+        Get_Filter(list_filter)
+    elif choose_get == 6:
+        Get_Time_based(url , header , p)
+    elif choose_get == 7:
+        Get_Numeric(url , header , p)
 
 # Check filter with special character
 def Filter(url , header , p , list_filter):
@@ -171,6 +196,8 @@ def Get_Numeric(url , header , p):
     s_p = input("Sepecial params : ")
     sp = input("Sepecial disappear : ")
     print("Numeric : " ,binary_search(0,100000000000000000,p, sp , s_p , url ,user_ch,list,  header))
+    f1.close()
+    
 
 
         
