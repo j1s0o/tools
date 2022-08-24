@@ -29,6 +29,7 @@ while(True):
         print("4.Error based sql")
         print("5.Your payload + filter bypass ")
         print("6.Time based sql")
+        print("7.Numeric")
         choose_get = int(input("choose : "))
         if choose_get == 1 :
             Filter(url , header , p , list_filter)
@@ -42,6 +43,8 @@ while(True):
             Get_Filter(list_filter)
         elif choose_get == 6:
             Get_Time_based(url , header , p)
+        elif choose_get == 7:
+            Get_Numeric(url , header , p)
     elif choose == 2: # khoi tao data
         print("1.Check filter")
         print("2.Easy payload brute force")
